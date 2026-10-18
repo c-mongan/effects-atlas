@@ -1,0 +1,53 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Start here/Introduction" />
+
+# Effects Atlas
+
+Twenty visual styles and eight additions, curated as isolated React examples.
+Start with an effect in the sidebar. Each has an animated Default, a Paused state,
+and a GPU-independent Fallback. The source and license appear below every preview.
+
+## Use a component
+
+```tsx
+import { Effect } from 'effects-atlas';
+import 'effects-atlas/styles.css';
+
+<Effect id="mesh-gradient" />
+<Effect id="holographic-foil" paused />
+```
+
+The host respects `prefers-reduced-motion`, including changes while the page is
+open. Pause, reduced motion and hidden documents unmount live simulations and use
+original static SVG artwork. These are illustrative replacements, not frozen
+copies of the last frame. Missing graphics APIs and renderer failures follow the
+same path with an explanatory status. Every preview is decorative; meaningful
+text remains outside it.
+
+## Interact
+
+Foil: move a pointer, tap, or focus the card and use arrow keys. Ink Flow: move or
+drag inside the canvas, or activate **Add ink stroke** with a keyboard. Its initial
+stroke demonstrates the effect without requiring pointer discovery.
+
+## Rendering
+
+Paper Shaders uses WebGL2. Clay uses Three.js/WebGL2. Advanced examples use the
+published Shaders WebGPU package; its telemetry is disabled. GPU availability
+varies by browser and device. The fallback is part of the component's intended
+behavior. This atlas does not claim a frame rate or battery budget.
+
+## AI clients
+
+The official Storybook MCP addon runs at `http://127.0.0.1:6006/mcp` alongside the
+development server. Query `docs-list`, then `docs-show`, before inventing props.
+See `docs/MCP.md` for project-scoped configuration and protocol verification.
+Static Storybook builds do not include a running MCP server.
+
+## Provenance
+
+Paper Shaders (Apache-2.0), Shaders, Three.js and Sprite Lite (MIT) use pinned npm dependencies. Selected Paper React adapters are vendored with a scoped async-failure fix and Apache-2.0 notices. The adapted Mandelbulb shader, UI FX interaction and Magic UI grid
+have preserved MIT notices. Other compositions and static artwork are original.
+The risograph entry is a Paper halftone interpretation; it does not redistribute
+the old demo's assets. See `THIRD_PARTY_NOTICES.md` and `docs/EVALUATION.md`.

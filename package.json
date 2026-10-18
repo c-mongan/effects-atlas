@@ -1,0 +1,89 @@
+{
+  "name": "effects-atlas",
+  "version": "0.1.0",
+  "description": "A curated React visual-effects atlas with accessible motion controls and Storybook stories.",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "licenses"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": {
+      "types": "./dist/styles-css.d.ts",
+      "default": "./dist/styles.css"
+    }
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "storybook": "storybook dev -p 6006 --host 127.0.0.1 --no-open --disable-telemetry",
+    "build-storybook": "storybook build --disable-telemetry",
+    "build": "node scripts/clean.mjs && tsc -p tsconfig.build.json && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --project unit",
+    "test:stories": "vitest run --project storybook",
+    "test:browser": "playwright test",
+    "test:mcp": "node scripts/mcp-smoke.mjs",
+    "check": "npm run typecheck && npm test && npm run build && npm run build-storybook",
+    "prepack": "npm run build",
+    "test:package": "node scripts/package-smoke.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test:no-gpu": "ATLAS_NO_GPU=1 playwright test --grep \"Metaballs|Particle swarm|motion preference|fractal distance|lost WebGL|initialization failure|GPU absence\" --output artifacts/no-gpu --reporter=list"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "shaders": "4.0.4",
+    "sprite-lite": "0.1.1",
+    "three": "0.183.2",
+    "@paper-design/shaders": "0.0.81"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "@playwright/test": "1.64.1",
+    "@storybook/addon-a11y": "10.6.2",
+    "@storybook/addon-docs": "10.6.2",
+    "@storybook/addon-mcp": "10.6.2",
+    "@storybook/addon-vitest": "10.6.2",
+    "@storybook/react-vite": "10.6.2",
+    "@testing-library/react": "16.3.2",
+    "@types/node": "22.19.15",
+    "@types/pngjs": "6.0.5",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@types/three": "0.183.1",
+    "@vitejs/plugin-react": "6.0.0",
+    "@vitest/browser-playwright": "5.0.5",
+    "axe-core": "4.14.0",
+    "jsdom": "29.0.1",
+    "pngjs": "7.0.0",
+    "prettier": "3.9.10",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "storybook": "10.6.2",
+    "typescript": "6.0.2",
+    "vite": "8.3.4",
+    "vitest": "5.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c-mongan/effects-atlas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/c-mongan/effects-atlas/issues"
+  }
+}

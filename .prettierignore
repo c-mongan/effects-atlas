@@ -1,0 +1,10 @@
+node_modules/
+dist/
+storybook-static/
+artifacts/
+test-results/
+playwright-report/
+package-lock.json
+*.glsl
+*.tgz
+graphify-out/

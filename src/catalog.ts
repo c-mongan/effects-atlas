@@ -1,0 +1,252 @@
+export type Renderer =
+  "dom" | "paper" | "webgpu" | "three" | "fractal" | "sprite";
+export interface EffectDefinition {
+  id: EffectId;
+  name: string;
+  renderer: Renderer;
+  source: string;
+  license: string;
+  description: string;
+}
+const effectEntries = [
+  [
+    "liquid-morph",
+    "Liquid morph",
+    "paper",
+    "Paper Shaders · Metaballs",
+    "Apache-2.0",
+    "Soft gradients blend into an organic silhouette.",
+  ],
+  [
+    "ascii-art",
+    "ASCII art",
+    "dom",
+    "Effects Atlas · original DOM composition",
+    "MIT",
+    "A character grid with a travelling wave.",
+  ],
+  [
+    "holographic-foil",
+    "Holographic foil",
+    "dom",
+    "Effects Atlas · adapted interaction from UI FX Kit",
+    "MIT",
+    "Foil highlights follow pointer, touch and arrow keys.",
+  ],
+  [
+    "bauhaus-shapes",
+    "Bauhaus shapes",
+    "dom",
+    "Effects Atlas · original SVG inspired by Bauhaus UI",
+    "MIT",
+    "A geometric composition with restrained motion.",
+  ],
+  [
+    "neon-glow",
+    "Neon glow",
+    "dom",
+    "Effects Atlas · original CSS",
+    "MIT",
+    "A glowing type study with a slow pulse.",
+  ],
+  [
+    "dithering",
+    "Dithering",
+    "paper",
+    "Paper Shaders · Dithering",
+    "Apache-2.0",
+    "Quantized shading and ordered noise.",
+  ],
+  [
+    "clay-3d",
+    "Clay 3D",
+    "three",
+    "Effects Atlas · original Three.js composition",
+    "MIT",
+    "A matte torus knot with soft lighting.",
+  ],
+  [
+    "halftone-dots",
+    "Halftone dots",
+    "paper",
+    "Paper Shaders · HalftoneDots",
+    "Apache-2.0",
+    "An original image translated into a dot screen.",
+  ],
+  [
+    "kinetic-typography",
+    "Kinetic typography",
+    "dom",
+    "Effects Atlas · original CSS",
+    "MIT",
+    "Staggered letter motion with readable semantic text.",
+  ],
+  [
+    "pixel-art",
+    "Pixel art",
+    "sprite",
+    "Sprite Lite · ThinkingSprite",
+    "MIT",
+    "Two small animated SVG pixel studies.",
+  ],
+  [
+    "particle-swarm",
+    "Particle swarm",
+    "webgpu",
+    "Shaders · Boids",
+    "MIT",
+    "A flock of particles rendered with WebGPU.",
+  ],
+  [
+    "risograph-print",
+    "Risograph print",
+    "paper",
+    "Paper Shaders · HalftoneCmyk / Effects Atlas palette",
+    "Apache-2.0",
+    "A layered print interpretation using halftone separation.",
+  ],
+  [
+    "glitch-effect",
+    "Glitch effect",
+    "dom",
+    "Effects Atlas · original CSS",
+    "MIT",
+    "A restrained chromatic displacement on type.",
+  ],
+  [
+    "topographic-lines",
+    "Topographic lines",
+    "webgpu",
+    "Shaders · ContourLines",
+    "MIT",
+    "Animated elevation bands over a gradient.",
+  ],
+  [
+    "glassmorphism",
+    "Glassmorphism",
+    "dom",
+    "Effects Atlas · original CSS",
+    "MIT",
+    "A translucent panel over moving color fields.",
+  ],
+  [
+    "paper-cutout",
+    "Paper cutout",
+    "dom",
+    "Effects Atlas · original SVG",
+    "MIT",
+    "Layered mountain silhouettes with soft paper shadows.",
+  ],
+  [
+    "vaporwave-grid",
+    "Vaporwave grid",
+    "dom",
+    "Effects Atlas · CSS adaptation of Magic UI RetroGrid",
+    "MIT",
+    "A perspective grid and a sunset disc.",
+  ],
+  [
+    "flow-fields",
+    "Flow fields",
+    "webgpu",
+    "Shaders · FlowField",
+    "MIT",
+    "Trails follow a smooth vector field.",
+  ],
+  [
+    "metaballs",
+    "Metaballs",
+    "paper",
+    "Paper Shaders · Metaballs",
+    "Apache-2.0",
+    "Ink-like drops merge and separate.",
+  ],
+  [
+    "ray-marched-fractals",
+    "Ray-marched fractals",
+    "fractal",
+    "WebGL-Mandelbulb · adapted, numerical guards added",
+    "MIT",
+    "A bounded, guarded Mandelbulb distance estimator.",
+  ],
+  [
+    "mesh-gradient",
+    "Mesh gradient",
+    "paper",
+    "Paper Shaders · MeshGradient",
+    "Apache-2.0",
+    "A softly evolving four-color field.",
+  ],
+  [
+    "liquid-metal",
+    "Liquid metal",
+    "paper",
+    "Paper Shaders · LiquidMetal",
+    "Apache-2.0",
+    "A transparent original shape becomes polished metal.",
+  ],
+  [
+    "watercolor",
+    "Watercolor",
+    "webgpu",
+    "Shaders · Watercolor",
+    "MIT",
+    "A pigment-like treatment over a gradient.",
+  ],
+  [
+    "ink-flow",
+    "Ink flow",
+    "webgpu",
+    "Shaders · InkFlow",
+    "MIT",
+    "Move or drag inside the stage to paint with fluid color.",
+  ],
+  [
+    "crt-screen",
+    "CRT screen",
+    "webgpu",
+    "Shaders · CRTScreen",
+    "MIT",
+    "Scanlines and curved-screen texture.",
+  ],
+  [
+    "vhs",
+    "VHS",
+    "webgpu",
+    "Shaders · VHS",
+    "MIT",
+    "Analog distortion over a color field.",
+  ],
+  [
+    "reaction-diffusion",
+    "Reaction-diffusion",
+    "webgpu",
+    "Shaders · ReactionDiffusion",
+    "MIT",
+    "A developing reaction pattern.",
+  ],
+  [
+    "light-shafts",
+    "Light shafts",
+    "paper",
+    "Paper Shaders · GodRays",
+    "Apache-2.0",
+    "Radiating light with a low-resolution rendering budget.",
+  ],
+] as const;
+export type EffectId = (typeof effectEntries)[number][0];
+export const effects: EffectDefinition[] = effectEntries.map(
+  ([id, name, renderer, source, license, description]) => ({
+    id,
+    name,
+    renderer: renderer as Renderer,
+    source,
+    license,
+    description,
+  }),
+) satisfies EffectDefinition[];
+export function getEffect(id: EffectId): EffectDefinition {
+  const definition = effects.find((effect) => effect.id === id);
+  if (!definition) throw new Error(`Unknown effect: ${id}`);
+  return definition;
+}
