@@ -8,6 +8,7 @@ import {
   downloadStarter,
   type StarterSelection,
 } from "./starter";
+import "../src/styles.css";
 import "./site.css";
 const legacyPath = new URLSearchParams(location.search).get("path");
 if (legacyPath?.startsWith("/story/") || legacyPath?.startsWith("/docs/"))
