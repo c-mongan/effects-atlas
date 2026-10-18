@@ -60,7 +60,9 @@ for (const mobile of [false, true]) {
           !process.env.REQUIRE_GPU &&
           ["webgpu", "paper", "three", "fractal"].includes(effect.renderer)
         ) {
-          await expect(page.getByRole("status")).not.toContainText("Checking");
+          await expect(page.getByRole("status")).not.toContainText(
+            /Checking|Outside viewport/,
+          );
           if (
             (await page.getByRole("status").textContent())?.includes(
               "GPU unavailable",

@@ -18,3 +18,15 @@ Effects Atlas original code and artwork: MIT, Copyright (c) 2026 Effects Atlas c
 - Bauhaus composition: original SVG, inspired by [Bauhaus UI Library](https://github.com/xhu96/bauhaus-ui-library), evaluated commit `073de432fc4a66a4425d018eed95776e75a5cc7e`. No library code is copied.
 
 All static fallback artwork, ASCII composition, typography, neon, glass, paper-cutout, clay composition and supplied SVG images are original to this repository. There are no external photographs, fonts, models or CDN demo assets. Optional design skills are linked in documentation and are not vendored or relicensed.
+
+## Gallery and recipe extension
+
+- **motion 14.3.0**: MIT. Runtime dependency used through its public API. Full notice: `licenses/motion.txt`.
+- **@react-three/fiber 9.8.2**: MIT. Runtime dependency used through its public API. Full notice: `licenses/react-three-fiber.txt`.
+- **@react-three/drei 10.7.9**: MIT. Runtime dependency used through its public API. Full notice: `licenses/react-three-drei.txt`.
+- **@tsparticles/react 4.4.0**: MIT. Runtime dependency used through its public API. Full notice: `licenses/tsparticles-react.txt`.
+- **@tsparticles/engine 4.4.0**: MIT. Runtime dependency used through its public API. Full notice: `licenses/tsparticles-engine.txt`.
+- **@tsparticles/slim 4.4.0**: MIT. Runtime dependency used through its public API. Full notice: `licenses/tsparticles-slim.txt`.
+- **@tsparticles/confetti 4.4.0**: MIT. Runtime dependency used through its public API. Full notice: `licenses/tsparticles-confetti.txt`.
+
+The gallery ZIP exporter uses fflate 0.8.3 (MIT), a build/UI dependency; see `licenses/fflate.txt`. Fiber and missing tsParticles package notices are from their official matching release tags. Motion Primitives is a design reference, not copied component source; see [recipe sources](docs/RECIPE_SOURCES.md) and `licenses/motion-primitives-reference.txt`. React Bits is an external reference only; no component code or assets are bundled. Website compositions and gallery artwork are original Atlas content.

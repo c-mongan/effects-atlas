@@ -5,7 +5,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     env:
       CI: "true"
       STORYBOOK_DISABLE_TELEMETRY: "1"
@@ -22,6 +22,11 @@ jobs:
       - run: npm run test:browser
       - run: npm run test:no-gpu
       - run: npm run test:package
+      - run: npm run build:starters
+      - run: npm run build:gallery
+      - run: node scripts/assemble-site.mjs
+      - run: npm run test:gallery
+      - run: npm run test:starters
       - run: npm audit --audit-level=moderate
       - name: Verify live MCP
         run: |
@@ -46,11 +51,11 @@ jobs:
           name: storybook-static
           path: storybook-static/
 
-      - name: Package verified Storybook for Pages
+      - name: Package verified gallery and Storybook for Pages
         if: vars.ENABLE_PAGES == 'true' && github.event_name == 'push' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
-          path: storybook-static/
+          path: site-dist/
   cross-browser:
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -70,8 +75,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps ${{ matrix.browser }}
-      - run: npm run build-storybook
+      - run: npm run build:site
       - run: npm run test:browser
+      - run: npm run test:gallery
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
@@ -98,6 +104,6 @@ jobs:
     steps:
       - name: Configure Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
-      - name: Deploy verified Storybook
+      - name: Deploy verified gallery
         id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

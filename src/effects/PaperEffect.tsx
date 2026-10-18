@@ -1,3 +1,8 @@
+import {
+  boundedSetting,
+  paletteSettings,
+  type EffectSettings,
+} from "../settings";
 import { Dithering } from "../vendor/paper/shaders/dithering";
 import { GodRays } from "../vendor/paper/shaders/god-rays";
 import { HalftoneCmyk } from "../vendor/paper/shaders/halftone-cmyk";
@@ -15,17 +20,28 @@ const fill = {
 };
 const image = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"><rect width="1000" height="600" fill="#f4efde"/><circle cx="370" cy="280" r="210" fill="#26344a"/><circle cx="610" cy="220" r="150" fill="#d76c60"/><path d="M0 560L1000 150V600H0Z" fill="#5087a0"/></svg>')}`;
 const metalImage = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><path fill="white" d="M400 95C515 20 680 165 615 285C735 370 575 565 450 475C335 595 135 460 205 335C75 210 270 45 400 95Z"/></svg>')}`;
-function PaperRecipe({ id }: { id: EffectId }) {
+function PaperRecipe({
+  id,
+  settings,
+}: {
+  id: EffectId;
+  settings?: EffectSettings;
+}) {
+  const rate = boundedSetting(settings?.speed);
   const common = { style: fill, maxPixelCount: 800_000, minPixelRatio: 1 };
   switch (id) {
     case "liquid-morph":
       return (
         <Metaballs
           {...common}
-          speed={0.4}
+          speed={0.4 * rate}
           count={4}
           size={1}
-          colors={["#f17a91", "#b38be5", "#efb17e"]}
+          colors={paletteSettings(settings?.colors, [
+            "#f17a91",
+            "#b38be5",
+            "#efb17e",
+          ])}
           colorBack="#151422"
         />
       );
@@ -33,10 +49,10 @@ function PaperRecipe({ id }: { id: EffectId }) {
       return (
         <Metaballs
           {...common}
-          speed={0.45}
+          speed={0.45 * rate}
           count={10}
           size={0.45}
-          colors={["#302b65"]}
+          colors={paletteSettings(settings?.colors, ["#302b65"])}
           colorBack="#e8dfee"
         />
       );
@@ -44,9 +60,9 @@ function PaperRecipe({ id }: { id: EffectId }) {
       return (
         <Dithering
           {...common}
-          speed={0.3}
+          speed={0.3 * rate}
           colorBack="#15172d"
-          colorFront="#aaa5ec"
+          colorFront={paletteSettings(settings?.colors, ["#aaa5ec"])[0]}
         />
       );
     case "halftone-dots":
@@ -57,8 +73,13 @@ function PaperRecipe({ id }: { id: EffectId }) {
       return (
         <MeshGradient
           {...common}
-          speed={0.3}
-          colors={["#5248c8", "#b58cf1", "#ed9d84", "#a4d9d5"]}
+          speed={0.3 * rate}
+          colors={paletteSettings(settings?.colors, [
+            "#5248c8",
+            "#b58cf1",
+            "#ed9d84",
+            "#a4d9d5",
+          ])}
         />
       );
     case "liquid-metal":
@@ -72,7 +93,7 @@ function PaperRecipe({ id }: { id: EffectId }) {
         />
       );
     case "light-shafts":
-      return <GodRays {...common} speed={0.4} />;
+      return <GodRays {...common} speed={0.4 * rate} />;
     default:
       return null;
   }
@@ -81,13 +102,15 @@ function PaperRecipe({ id }: { id: EffectId }) {
 export function PaperEffect({
   id,
   onFailure,
+  settings,
 }: {
   id: EffectId;
   onFailure: () => void;
+  settings?: EffectSettings;
 }) {
   return (
     <PaperFailureContext value={onFailure}>
-      <PaperRecipe id={id} />
+      <PaperRecipe id={id} settings={settings} />
     </PaperFailureContext>
   );
 }

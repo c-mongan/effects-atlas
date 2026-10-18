@@ -1,0 +1,6 @@
+Motion Primitives is a design reference only. No upstream source code is included.
+Repository: https://github.com/ibelick/motion-primitives
+Reference revision: 120f64f6ca60348e251f929e9c81f11ccbe45eda
+The README at this revision states: "Licensed under the [MIT license](/LICENSE.md)."
+The linked LICENSE.md is absent. GitHub history queries for LICENSE and LICENSE.md returned no commits on 2026-10-18. No upstream copyright notice is asserted here.
+The Effects Atlas implementations are original code under the Effects Atlas MIT license.

@@ -14,6 +14,8 @@ import { getEffect, type EffectId } from "./catalog";
 import { detectCapability, type Capability } from "./runtime/capabilities";
 import { usePageVisible, useReducedMotion } from "./runtime/useMotion";
 import { StaticPreview } from "./effects/StaticPreview";
+import { useInViewport } from "./runtime/useInViewport";
+import { boundedSetting, type EffectSettings } from "./settings";
 const LiveEffect = lazy(() => import("./effects/LiveEffect"));
 export interface EffectProps {
   /** One of the 28 curated effect identifiers. */
@@ -22,6 +24,7 @@ export interface EffectProps {
   paused?: boolean;
   /** Render the static preview without probing or mounting a GPU renderer. */
   forceFallback?: boolean;
+  settings?: EffectSettings;
   className?: string;
   style?: CSSProperties;
 }
@@ -45,6 +48,7 @@ export function Effect({
   id,
   paused = false,
   forceFallback = false,
+  settings,
   className = "",
   style,
 }: EffectProps) {
@@ -58,6 +62,7 @@ export function Effect({
     ready: boolean;
   } | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const inViewport = useInViewport(stageRef);
   const titleId = useId();
   const fail = useCallback(() => setFailed(true), []);
   const kind: Capability =
@@ -66,7 +71,8 @@ export function Effect({
       : ["paper", "three", "fractal"].includes(definition.renderer)
         ? "webgl2"
         : "none";
-  const motionAllowed = !paused && !localPause && !reduced && visible;
+  const motionAllowed =
+    !paused && !localPause && !reduced && visible && inViewport;
   useEffect(() => {
     setFailed(false);
   }, [id]);
@@ -101,17 +107,26 @@ export function Effect({
         ? "Animation paused: static preview"
         : !visible
           ? "Page hidden: static preview"
-          : failed
-            ? "Renderer unavailable: static preview"
-            : !supported
-              ? capability?.kind === kind
-                ? "GPU unavailable: static preview"
-                : "Checking graphics: static preview"
-              : "";
+          : !inViewport
+            ? "Outside viewport: static preview"
+            : failed
+              ? "Renderer unavailable: static preview"
+              : !supported
+                ? capability?.kind === kind
+                  ? "GPU unavailable: static preview"
+                  : "Checking graphics: static preview"
+                : "";
   return (
     <section
       className={`ea-effect ${className}`}
-      style={style}
+      style={
+        {
+          ...(id === "neon-glow"
+            ? { "--ea-neon-intensity": boundedSetting(settings?.intensity) }
+            : {}),
+          ...style,
+        } as CSSProperties
+      }
       aria-labelledby={titleId}
       data-effect={id}
       data-active={active ? "true" : "false"}
@@ -137,7 +152,7 @@ export function Effect({
           <RenderBoundary key={id} onFailure={fail}>
             <Suspense fallback={null}>
               <div className="ea-live" data-testid="live-effect">
-                <LiveEffect id={id} onFailure={fail} />
+                <LiveEffect id={id} onFailure={fail} settings={settings} />
               </div>
             </Suspense>
           </RenderBoundary>

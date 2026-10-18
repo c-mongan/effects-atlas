@@ -1,86 +1,93 @@
 # Effects Atlas
 
-[Open the live Storybook demo](https://c-mongan.github.io/effects-atlas/) · [CI checks](https://github.com/c-mongan/effects-atlas/actions/workflows/ci.yml)
+[Explore the gallery](https://c-mongan.github.io/effects-atlas/) · [Read the guide](https://c-mongan.github.io/effects-atlas/#/guide) · [Storybook](https://c-mongan.github.io/effects-atlas/storybook/) · [CI checks](https://github.com/c-mongan/effects-atlas/actions/workflows/ci.yml)
 
-A curated React visual-effects library and Storybook: **28 effects, 84 isolated stories**, explicit provenance, and GPU-independent previews.
+**40 React examples for expressive websites: 28 visual effects and 12 practical recipes.** Browse static previews, try one animation, adjust supported settings, and download a working project. Source credits, motion controls, and browser fallbacks are part of each example.
 
-![28 effects on desktop](docs/screenshots/overview-desktop.jpg)
+![Effects Atlas gallery](docs/screenshots/gallery.jpg)
 
-## Start locally
+## Find a useful detail
 
-Node **22.12+** and npm are required.
+Search by name or filter by category, use, renderer, and source. Open an example to see its controls, copy the code, or download a React/Vite starter. Its URL keeps your selected settings. Gallery cards are static until you select Play; only one card animates at a time.
+
+Three website compositions show effects in context: a product hero, a portfolio project card, and a feature section. The guide covers choosing an effect, installation, customisation, accessibility, performance, and attribution. Use a few details with purpose; animation is not a substitute for readable content.
+
+## Take an example into your project
+
+Download a starter from any example. Extract it, then run:
 
 ```sh
 npm ci
-npx playwright install chromium
-npm run storybook
+npm run dev
 ```
 
-Open **http://127.0.0.1:6006**. Default animates, Paused shows an illustrative static preview, and Fallback demonstrates the same safe path without probing graphics APIs. Run `npm run build-storybook` for a static, hostable Storybook. No account, API key, remote images or font service is required.
-
-## Use the React component
-
-The repository builds an ESM package; it has not been published to npm. To try it in another project, run `npm pack` here and install the resulting tarball there.
+The ZIP contains application source, styles, pinned dependencies, a lockfile, licences, and a local `effects-atlas.tgz`. There is no npm publication or account requirement. The downloaded application uses the same selected settings as the preview and copied code. Runtime assets are local; installation downloads dependencies from npm.
 
 ```tsx
-import { Effect } from "effects-atlas";
+import { Effect, Recipe } from "effects-atlas";
 import "effects-atlas/styles.css";
 
-export function Example() {
-  return <Effect id="holographic-foil" />;
-}
+<Effect id="mesh-gradient" settings={{ speed: 0.7, colors: ["#88c6c4"] }} />
+<Recipe id="shared-layout-tabs" />
 ```
 
-`Effect` accepts `id`, `paused`, `forceFallback`, `className` and `style`. `paused` is a caller-enforced pause; the built-in button can additionally pause an otherwise active effect. Reduced motion always takes priority. The exported `effects` catalogue contains names, rendering engines and source/license metadata. Individual effect recipes live under `src/effects/`; stories show the exact host props.
+Existing `Effect` imports remain compatible. `Effect` and `Recipe` accept `id`, `paused`, `forceFallback`, optional `settings`, `className`, and `style`. Only supported settings are shown in the gallery. `effects` and `recipes` expose typed catalogues; `EffectId` and `RecipeId` identify their entries.
 
-Pause, reduced motion and hidden tabs **unmount** live effects and display original static SVG artwork. These previews are representative illustrations, not screenshots of the last animation frame. GPU capability checks run before mounting WebGL2/WebGPU effects. Failed adapters, device initialization and WebGL context loss show a labelled static preview instead of a blank canvas. Client renderers are loaded lazily; server rendering starts with static artwork.
+Original effects include gradients, foil, clay, print treatments, typography, particles, glass, pixel art and a Mandelbulb. New recipes:
 
-Foil supports pointer, touch and arrow-key input. Ink Flow has an initial demonstration stroke and an **Add ink stroke** keyboard button. Animations are decorative, with a readable heading, description and status outside the preview.
+| Foundation                          | Recipes                                                                    |
+| ----------------------------------- | -------------------------------------------------------------------------- |
+| Motion                              | Scroll reveal, spring card, shared-layout tabs                             |
+| Motion Primitives design references | Word reveal, staggered features, animated panel                            |
+| tsParticles                         | Linked particles, ambient particles, button-triggered confetti             |
+| React Three Fiber + Drei            | Glass transmission, reflective pedestal, floating object with soft shadows |
 
-## Included effects
+The Motion Primitives recipes are original implementations inspired by the named patterns. No upstream component code is included. React Bits is a linked reference only. See [source and licence details](THIRD_PARTY_NOTICES.md) and [recipe sources](docs/RECIPE_SOURCES.md).
 
-| Original twenty                                                           | Eight additions                  |
-| ------------------------------------------------------------------------- | -------------------------------- |
-| Liquid morph, ASCII art, holographic foil, Bauhaus shapes, neon glow      | Mesh gradient, liquid metal      |
-| Dithering, clay 3D, halftone dots, kinetic typography, pixel art          | Watercolor, ink flow             |
-| Particle swarm, risograph print, glitch, topographic lines, glassmorphism | CRT, VHS                         |
-| Paper cutout, vaporwave grid, flow fields, metaballs, ray-marched fractal | Reaction-diffusion, light shafts |
+## Run the repository
 
-Paper Shaders supplies most WebGL examples through a small set of licensed, locally patched React adapters. Shaders supplies optional WebGPU effects. Sprite Lite and Three.js supply pixels and clay. Several compositions are original or small credited adaptations. The risograph recipe is a Paper halftone interpretation rather than a redistributed copy of the older model demo. [Provenance and licenses](THIRD_PARTY_NOTICES.md) identify what is copied, adapted, depended on or original.
-
-## Storybook MCP
-
-The official `@storybook/addon-mcp` runs with the dev server at **http://127.0.0.1:6006/mcp**. Project configs are included for `.mcp.json` clients and VS Code. They do not modify global settings. Use your client's normal project trust/connection flow.
+Use Node **22.12+** and npm.
 
 ```sh
-# With Storybook already running:
-npm run test:mcp
+npm ci
+npm run dev:gallery  # http://127.0.0.1:6008
+npm run storybook   # separate terminal: http://127.0.0.1:6006
 ```
 
-The smoke test performs an actual protocol handshake, tool discovery and documentation queries. [MCP setup](docs/MCP.md) explains the tools and client configuration. A static Storybook build has no running MCP endpoint. Storybook's AI APIs are currently preview features.
-
-## Checks
+For downloads and legacy redirects in the local gallery, build the assembled site:
 
 ```sh
-npx playwright install firefox webkit # additional test browsers
-npm run check          # strict types, unit tests, library and Storybook builds
-npm run test:stories   # Storybook's Vitest browser/a11y integration
-npm run test:browser   # every effect at desktop/mobile + static states and interactions
-npm run test:firefox   # Firefox desktop and narrow viewport checks
-npm run test:webkit    # Playwright WebKit; separate from the installed Safari app
-npm run test:no-gpu    # explicitly disable graphics APIs and check fallback/CI paths
-npm run test:mcp       # running dev server required
+npm run build:site
+node scripts/serve-gallery.mjs # http://127.0.0.1:6008
+```
+
+The site build combines the gallery, starter assets and Storybook. Existing `?path=/story/...` links and root iframe links redirect to `/storybook/`, preserving their parameters.
+
+## Motion, capability and performance
+
+Pause, reduced motion, hidden tabs and offscreen previews stop expensive rendering. Decorative GPU previews switch to original static artwork; that artwork is not a frozen animation frame. Interactive recipes retain their controls when motion stops. Confetti requires a button press and has a bounded lifetime.
+
+GPU availability depends on browser, device and driver. Unsupported APIs display a labelled fallback. The heavy renderers load lazily; browsing static thumbnails does not start 40 GPU scenes. Install dependencies are broader than the code downloaded for a single runtime preview. No fixed FPS or battery claim is made.
+
+## Test and contribute
+
+```sh
+npx playwright install chromium firefox webkit
+npm run check          # types, units, library and Storybook builds
+npm run test:stories   # all isolated stories
+npm run test:browser   # Chromium effects and recipes
+npm run test:firefox
+npm run test:webkit
+npm run test:no-gpu
+npm run build:site
+npm run test:gallery
+npm run test:starters  # builds and browser-tests all 40 starter projects
+npm run test:package
 npm audit
 ```
 
-On a machine with supported native graphics, use `REQUIRE_GPU=1 npm run test:browser` to require live GPU rendering. Without that flag, a genuinely unavailable API is recorded as a tested fallback; runtime initialization failures still fail the default tests. Mobile checks use viewport/touch emulation, not physical devices. Firefox uses a 390px viewport with touch support because Playwright does not support its `isMobile` option. Playwright WebKit is tested separately from the installed Safari app. The repository does not claim fixed FPS, battery cost or universal browser compatibility. [Evaluation and known limits](docs/EVALUATION.md) describe the evidence.
+Use `REQUIRE_GPU=1 npm run test:browser` on supported hardware to require native graphics. CI separates API unavailability from renderer failures. Firefox narrow-screen checks use viewport and touch support; they are not physical-phone tests. Playwright WebKit is separate from installed Safari. See [verification](docs/VERIFICATION.md) for measured scope and limitations.
 
-To regenerate the overview images after the native suite, run `python3 scripts/contact-sheet.py` with Pillow installed.
+The official Storybook MCP addon is available only through the local dev server at `http://127.0.0.1:6006/mcp`. With Storybook running, use `npm run test:mcp`. The static website has no MCP server. [MCP setup](docs/MCP.md) describes project-scoped connections.
 
-CI installs Chromium, Firefox and WebKit in separate jobs, runs the checks and uploads browser reports/screenshots. The static Storybook is also uploaded as a build artifact. After GitHub Pages is enabled with GitHub Actions as its source and the repository variable `ENABLE_PAGES` is set to `true`, a push to the default branch deploys the verified Storybook only after every check passes. Pull requests run verification without deploying. CI does not publish npm packages or create repositories.
-
-See [the local verification report](docs/VERIFICATION.md) for the exact checks and limits.
-
-## Contribute and release
-
-See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md) and the [release checklist](docs/RELEASING.md). MIT applies to original Atlas code; third-party notices remain in force. No commercial design kit, proprietary skill or private evaluation asset is bundled.
+CI verifies Chromium, Firefox and WebKit before deploying the gallery and Storybook to GitHub Pages. It never publishes an npm package. See [contributing](CONTRIBUTING.md), [security](SECURITY.md), and [release notes](docs/RELEASING.md). Original code is MIT; third-party notices remain in force.

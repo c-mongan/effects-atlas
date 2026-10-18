@@ -8,3 +8,7 @@ package-lock.json
 *.glsl
 *.tgz
 graphify-out/
+
+site-dist/
+.generated/
+work/

@@ -1,3 +1,4 @@
+import type { EffectSettings } from "../settings";
 import { lazy, Suspense } from "react";
 import { ThinkingSprite } from "sprite-lite";
 import { getEffect, type EffectId } from "../catalog";
@@ -19,8 +20,10 @@ const Fractal = lazy(() =>
 export default function LiveEffect({
   id,
   onFailure,
+  settings,
 }: {
   id: EffectId;
+  settings?: EffectSettings;
   onFailure: () => void;
 }) {
   const renderer = getEffect(id).renderer;
@@ -29,7 +32,7 @@ export default function LiveEffect({
       {renderer === "dom" ? (
         <DomEffect id={id} />
       ) : renderer === "paper" ? (
-        <Paper id={id} onFailure={onFailure} />
+        <Paper id={id} onFailure={onFailure} settings={settings} />
       ) : renderer === "webgpu" ? (
         <Gpu id={id} onFailure={onFailure} />
       ) : renderer === "three" ? (

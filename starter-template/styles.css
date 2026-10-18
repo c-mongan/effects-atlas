@@ -1,0 +1,20 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color-scheme: dark;
+  background: #0b0c13;
+  color: #f3f1fa;
+}
+body {
+  margin: 0;
+  padding: clamp(12px, 3vw, 40px);
+}
+button,
+input {
+  font: inherit;
+}
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 3px solid #a8e9ff;
+  outline-offset: 4px;
+}
