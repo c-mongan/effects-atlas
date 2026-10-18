@@ -40,7 +40,9 @@
     "test:package": "node scripts/package-smoke.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test:no-gpu": "ATLAS_NO_GPU=1 playwright test --grep \"Metaballs|Particle swarm|motion preference|fractal distance|lost WebGL|initialization failure|GPU absence\" --output artifacts/no-gpu --reporter=list"
+    "test:no-gpu": "ATLAS_NO_GPU=1 playwright test --grep \"Metaballs|Particle swarm|motion preference|fractal distance|lost WebGL|initialization failure|GPU absence\" --output artifacts/no-gpu --reporter=list",
+    "test:firefox": "ATLAS_BROWSER=firefox playwright test",
+    "test:webkit": "ATLAS_BROWSER=webkit playwright test"
   },
   "peerDependencies": {
     "react": "^19.0.0",

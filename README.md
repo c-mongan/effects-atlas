@@ -62,19 +62,22 @@ The smoke test performs an actual protocol handshake, tool discovery and documen
 ## Checks
 
 ```sh
+npx playwright install firefox webkit # additional test browsers
 npm run check          # strict types, unit tests, library and Storybook builds
 npm run test:stories   # Storybook's Vitest browser/a11y integration
 npm run test:browser   # every effect at desktop/mobile + static states and interactions
+npm run test:firefox   # Firefox desktop and narrow viewport checks
+npm run test:webkit    # Playwright WebKit; separate from the installed Safari app
 npm run test:no-gpu    # explicitly disable graphics APIs and check fallback/CI paths
 npm run test:mcp       # running dev server required
 npm audit
 ```
 
-On a machine with supported native graphics, use `REQUIRE_GPU=1 npm run test:browser` to require live GPU rendering. Without that flag, a genuinely unavailable API is recorded as a tested fallback; runtime initialization failures still fail the default tests. Mobile checks are Chromium viewport/touch emulation, not physical-device certification. The repository does not claim fixed FPS, battery cost or universal browser compatibility. [Evaluation and known limits](docs/EVALUATION.md) describe the evidence.
+On a machine with supported native graphics, use `REQUIRE_GPU=1 npm run test:browser` to require live GPU rendering. Without that flag, a genuinely unavailable API is recorded as a tested fallback; runtime initialization failures still fail the default tests. Mobile checks use viewport/touch emulation, not physical devices. Firefox uses a 390px viewport with touch support because Playwright does not support its `isMobile` option. Playwright WebKit is tested separately from the installed Safari app. The repository does not claim fixed FPS, battery cost or universal browser compatibility. [Evaluation and known limits](docs/EVALUATION.md) describe the evidence.
 
 To regenerate the overview images after the native suite, run `python3 scripts/contact-sheet.py` with Pillow installed.
 
-CI installs a full Chromium browser, runs the checks and uploads browser reports/screenshots. The static Storybook is also uploaded as a build artifact. After GitHub Pages is enabled with GitHub Actions as its source and the repository variable `ENABLE_PAGES` is set to `true`, a push to the default branch deploys the verified Storybook only after every check passes. Pull requests run verification without deploying. CI does not publish npm packages or create repositories.
+CI installs Chromium, Firefox and WebKit in separate jobs, runs the checks and uploads browser reports/screenshots. The static Storybook is also uploaded as a build artifact. After GitHub Pages is enabled with GitHub Actions as its source and the repository variable `ENABLE_PAGES` is set to `true`, a push to the default branch deploys the verified Storybook only after every check passes. Pull requests run verification without deploying. CI does not publish npm packages or create repositories.
 
 See [the local verification report](docs/VERIFICATION.md) for the exact checks and limits.
 

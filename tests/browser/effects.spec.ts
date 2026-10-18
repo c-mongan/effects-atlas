@@ -45,7 +45,8 @@ for (const mobile of [false, true]) {
         ? { width: 390, height: 844 }
         : { width: 1440, height: 1000 },
       hasTouch: mobile,
-      isMobile: mobile,
+      // Firefox supports narrow viewports and touch, but not isMobile emulation.
+      isMobile: mobile && process.env.ATLAS_BROWSER !== "firefox",
     });
     for (const effect of effects) {
       test(effect.name, async ({ page }, testInfo) => {
@@ -306,6 +307,8 @@ test("WebGPU initialization failure after a successful probe has a fallback", as
       }
     ).gpu;
     if (!gpu) return;
+    // Keep the patched GPU object stable across WebKit navigator accesses.
+    Object.defineProperty(navigator, "gpu", { value: gpu, configurable: true });
     const original = gpu.requestAdapter.bind(gpu);
     let requests = 0;
     gpu.requestAdapter = (...args: unknown[]) =>

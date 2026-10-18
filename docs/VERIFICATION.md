@@ -47,3 +47,23 @@ Fresh checks on 18 October 2026 used Node 22.23.0 and Chromium 156 on macOS ARM6
 - Publication preparation excludes the machine handoff and generated graph. Pages deployment requires the repository variable `ENABLE_PAGES=true`.
 
 These checks do not establish physical-phone, Safari/Firefox, battery or sustained frame-rate support. The older snapshot results above remain separate from this run.
+
+## Firefox, WebKit and native Safari checks
+
+18 October 2026, macOS ARM64. These results extend the earlier browser scope.
+
+| Browser or check                      | Result                                                                                                                                                                           |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Playwright Firefox 157.0              | All 120 existing browser tests passed. Nine focused checks passed after the fixes, including layout at 320px, 390px and 1440px.                                                  |
+| Playwright WebKit 27.2                | 119 of 120 existing tests passed initially. The remaining failure was in the WebGPU failure injection. After correcting it, all eight affected and new regression checks passed. |
+| Chromium                              | All eight affected and new regression checks passed after the fixes.                                                                                                             |
+| Installed Safari 26.6.2               | Manual checks on the public site confirmed live Mesh Gradient (WebGL) and Particle Swarm (WebGPU), foil rendering, pause/resume, and the hidden-tab static preview.              |
+| Types, unit tests, builds and stories | Strict types, nine unit tests, library/Storybook builds and all 84 Storybook tests passed.                                                                                       |
+
+Visual review found that the glass panel extended about 10px beyond its stage at a 390px viewport. A layout regression test failed before the fix. The glass scene now uses a `minmax(0, 1fr)` grid column so the panel fits inside its stage. Regression checks cover 320px, 390px and desktop widths. Screenshots confirm that the right border is visible.
+
+The WebKit failure-injection diagnostic showed zero calls to a patched GPU object's `requestAdapter`, while the live effect continued to render. Defining that patched object on `navigator.gpu` made the injection reliable: three adapter calls, the expected unavailable-renderer status, no canvas and no page errors. The original assertion timeout remains unchanged.
+
+Run `npm run test:firefox` or `npm run test:webkit` after installing those Playwright browsers. `ATLAS_BROWSER` also selects the browser for the common test command. JSON reports retain graphics-fallback annotations. Firefox's Particle Swarm check confirmed an unavailable WebGPU API and a working static fallback in this test build; that is not proof of live WebGPU rendering in Firefox. Firefox uses a narrow viewport and touch support without Playwright's unsupported `isMobile` option.
+
+CI now runs Firefox and WebKit as separate jobs, and Pages deployment waits for both jobs as well as the original verification job. See Actions for current full-suite results. Playwright WebKit is a separate build from installed Safari. The native Safari checks are a manual sample, not the full automated suite. Physical phones, sustained performance and manual screen-reader testing remain outside this verification.

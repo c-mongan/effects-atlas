@@ -241,6 +241,7 @@
   position: absolute;
   inset: 0;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   place-items: center;
   background: linear-gradient(120deg, #27294c, #382542, #373641);
 }
