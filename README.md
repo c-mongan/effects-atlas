@@ -1,5 +1,7 @@
 # Effects Atlas
 
+[Open the live Storybook demo](https://c-mongan.github.io/effects-atlas/) · [CI checks](https://github.com/c-mongan/effects-atlas/actions/workflows/ci.yml)
+
 A curated React visual-effects library and Storybook: **28 effects, 84 isolated stories**, explicit provenance, and GPU-independent previews.
 
 ![28 effects on desktop](docs/screenshots/overview-desktop.jpg)
