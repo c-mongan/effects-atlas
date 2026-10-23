@@ -10,9 +10,9 @@
 
 **22 seconds.** Recorded gallery screenshots. The project includes 28 effects and 12 recipes.
 
-https://github.com/user-attachments/assets/e608e901-2675-45e5-8130-7932f0225aae
+[![Watch the 22-second video overview](docs/portfolio-video/poster.jpg)](https://github.com/c-mongan/effects-atlas/releases/tag/portfolio-overview-2026-10-23)
 
-[Open the video](https://github.com/user-attachments/assets/e608e901-2675-45e5-8130-7932f0225aae) · [Transcript](docs/portfolio-video/transcript.txt) · [Captions](docs/portfolio-video/captions.srt) · [Credits and source notes](docs/portfolio-video/README.md)
+[Watch on GitHub](https://github.com/c-mongan/effects-atlas/releases/tag/portfolio-overview-2026-10-23) · [Download MP4](https://github.com/c-mongan/effects-atlas/releases/download/portfolio-overview-2026-10-23/effects.mp4) · [Transcript](docs/portfolio-video/transcript.txt) · [Captions](docs/portfolio-video/captions.srt) · [Credits and source notes](docs/portfolio-video/README.md)
 <!-- portfolio-video:end -->
 
 ![Effects Atlas gallery](docs/screenshots/gallery.jpg)

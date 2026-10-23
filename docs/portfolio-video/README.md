@@ -1,8 +1,8 @@
 # Effects Atlas: short video overview
 
-[![Watch the 22-second overview](poster.jpg)](https://github.com/user-attachments/assets/e608e901-2675-45e5-8130-7932f0225aae)
+[![Watch the 22-second overview](poster.jpg)](https://github.com/c-mongan/effects-atlas/releases/tag/portfolio-overview-2026-10-23)
 
-[Open or download the MP4](https://github.com/user-attachments/assets/e608e901-2675-45e5-8130-7932f0225aae) · [Transcript](transcript.txt) · [Captions (SRT)](captions.srt) · [Captions (VTT)](captions.vtt)
+[Watch on GitHub](https://github.com/c-mongan/effects-atlas/releases/tag/portfolio-overview-2026-10-23) · [Download MP4](https://github.com/c-mongan/effects-atlas/releases/download/portfolio-overview-2026-10-23/effects.mp4) · [Transcript](transcript.txt) · [Captions (SRT)](captions.srt) · [Captions (VTT)](captions.vtt)
 
 Recorded gallery screenshots. The project includes 28 effects and 12 recipes.
 
@@ -13,7 +13,7 @@ The video introduces the project; it does not replace its validation records or 
 - Duration: 21.833 seconds; 1920 × 1080; 30 fps; H.264 video and AAC audio.
 - Published video SHA-256: `1abf94a477f12dad1b765cf804888a19494f5afb90b301e0e9ef6870abb767b2`.
 - AI narration: Inworld TTS 2, using the voice selected by the project author.
-- Music: *Happy Beats / Business Moves Vol. 10* by [Sascha Ende, ende.app](https://ende.app/en), licensed under [CC BY 4.0](https://ende.app/en/standard-license). The track is trimmed, faded, and mixed beneath speech.
+- Music: *Happy Beats / Business Moves Vol. 10* by Sascha Ende (ende.app), licensed under [CC BY 4.0](https://github.com/spdx/license-list-data/blob/main/text/CC-BY-4.0.txt); see the [bundled music attribution](https://github.com/latent-spaces/brag/blob/99a49090808cff1f42ba1fc2f939ddbf7724a4a9/skills/brag/assets/music/README.md). The track is trimmed, faded, and mixed beneath speech.
 - Story and video workflow: [Brag](https://github.com/latent-spaces/brag); rendered locally with [Hyperframes](https://github.com/heygen-com/hyperframes).
 
 ## Visual sources
