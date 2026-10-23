@@ -1,0 +1,7 @@
+A website rarely needs more animation. It needs the right detail.
+
+I built Effects Atlas: forty React effects and practical recipes.
+
+Browse the gallery, try supported controls, and download a working starter.
+
+Motion controls, source credits, and browser fallbacks are part of each example.

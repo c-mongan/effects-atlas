@@ -1,0 +1,19 @@
+1
+00:00:00,350 --> 00:00:04,420
+A website rarely needs more animation. It needs
+the right detail.
+
+2
+00:00:05,120 --> 00:00:09,570
+I built Effects Atlas: forty React effects and
+practical recipes.
+
+3
+00:00:10,270 --> 00:00:14,600
+Browse the gallery, try supported controls, and
+download a working starter.
+
+4
+00:00:16,470 --> 00:00:21,284
+Motion controls, source credits, and browser
+fallbacks are part of each example.

@@ -4,6 +4,17 @@
 
 **40 React examples for expressive websites: 28 visual effects and 12 practical recipes.** Browse static previews, try one animation, adjust supported settings, and download a working project. Source credits, motion controls, and browser fallbacks are part of each example.
 
+<!-- portfolio-video:start -->
+
+## Short video overview
+
+**22 seconds.** Recorded gallery screenshots. The project includes 28 effects and 12 recipes.
+
+https://github.com/user-attachments/assets/e608e901-2675-45e5-8130-7932f0225aae
+
+[Open the video](https://github.com/user-attachments/assets/e608e901-2675-45e5-8130-7932f0225aae) · [Transcript](docs/portfolio-video/transcript.txt) · [Captions](docs/portfolio-video/captions.srt) · [Credits and source notes](docs/portfolio-video/README.md)
+<!-- portfolio-video:end -->
+
 ![Effects Atlas gallery](docs/screenshots/gallery.jpg)
 
 ## Find a useful detail
