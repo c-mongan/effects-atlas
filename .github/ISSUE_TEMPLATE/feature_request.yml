@@ -1,0 +1,25 @@
+name: Effect or recipe request
+description: Suggest a new effect, recipe or improvement.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like to see?
+    validations:
+      required: true
+  - type: textarea
+    id: use
+    attributes:
+      label: Where would you use it?
+      description: A hero, card, transition, background or something else.
+  - type: input
+    id: reference
+    attributes:
+      label: Reference link
+      description: Inspiration or upstream source, with its licence if you know it.
+  - type: textarea
+    id: a11y
+    attributes:
+      label: Accessibility and performance notes
+      description: Any thoughts on reduced motion, fallbacks or GPU cost.

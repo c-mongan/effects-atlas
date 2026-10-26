@@ -1,0 +1,32 @@
+name: Bug report
+description: Something in an effect, recipe, the gallery or a starter is not working.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Include what you expected instead.
+    validations:
+      required: true
+  - type: input
+    id: example
+    attributes:
+      label: Effect or recipe
+      description: Example id or gallery link, for instance `mesh-gradient`.
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser, OS and GPU
+      description: For instance Firefox 130 on macOS 15. Mention whether the static fallback appeared.
+  - type: textarea
+    id: extra
+    attributes:
+      label: Console output or screenshots
+      description: Remove any private data first.

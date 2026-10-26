@@ -21,3 +21,7 @@ Test mobile layouts, keyboard controls, reduced motion, pause, fallback, and the
 Run `npm run test:mcp` with Storybook running when documentation or MCP behavior changes. See [MCP setup](docs/MCP.md) and [release checks](docs/RELEASING.md). Record actual results and unresolved limits; a build alone does not prove browser behavior.
 
 Be respectful and specific in reviews. Do not publish private data, credentials, or exploit details in public issues.
+
+## Agent and MCP setup
+
+`.mcp.json` connects coding agents (for example Claude Code) to the local Storybook MCP server at `http://127.0.0.1:6006/mcp`. The server only exists while `npm run storybook` is running; without it, agents can still work from the source. `AGENTS.md` holds the project guidance those agents read. Trust prompts stay under your client's control.
