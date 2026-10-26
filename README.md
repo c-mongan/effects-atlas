@@ -15,7 +15,7 @@ npm ci
 npm run dev
 ```
 
-Use an effect or recipe in your own code:
+Use an effect or recipe in your own code. The package is not on npm yet: downloaded starters already include what they need, and for another project you can build a tarball with `npm run build && npm pack` and install the `.tgz`.
 
 ```tsx
 import { Effect, Recipe } from "effects-atlas";
